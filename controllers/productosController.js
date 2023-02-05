@@ -51,3 +51,15 @@ exports.nuevoProducto = async (req,res,next) => {
         next();
     }
 }
+
+//Mostrar todos los productos
+exports.mostrarProductos = async (req,res,next) => {
+    try {
+        // obtener todos los productos
+        const productos = await Productos.find({});
+        res.json(productos)
+    } catch (error) {
+        console.log(error);
+        next();
+    }
+}
