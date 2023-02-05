@@ -75,3 +75,31 @@ exports.mostrarProducto = async (req,res,next) => {
     //Mostrar el producto
     res.json(producto);
 }
+
+// Actualizar producto por ID
+exports.actualizarProducto = async (req,res,next) => {
+    try {
+
+        let productoAnterior = await Productos.findById(req.params.idProducto);
+
+        // construir un nuevo producto
+        let nuevoProducto = req.body;
+
+        // verificar si hay imagen nueva
+
+        if(req.file){
+            nuevoProducto.imagen = req.file.filename;
+        } else {
+            nuevoProducto.imagen = productoAnterior.imagen;
+        }
+
+        let producto = await Productos.findOneAndUpdate({_id : req.params.idProducto}, nuevoProducto, {
+            new: true,
+        });
+        res.json(producto)
+
+    }catch (error){
+        console.log(error);
+        next()
+    }
+}

@@ -33,5 +33,11 @@ module.exports = function () {
     // Mostrar producto especifico por su ID
     router.get('/productos/:idProducto', productosController.mostrarProducto);
 
+    //Actualizar productos
+    router.put('/productos/:idProducto',
+        productosController.subirArchivo,
+        productosController.actualizarProducto
+    )
+
     return router;
 }
