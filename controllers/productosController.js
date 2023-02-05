@@ -103,3 +103,14 @@ exports.actualizarProducto = async (req,res,next) => {
         next()
     }
 }
+
+//Eliminar un producto por ID
+exports.eliminarProducto = async (req,res,next) => {
+    try {
+        await Productos.findByIdAndDelete({ _id : req.params.idProducto});
+        res.json({mensaje : 'El producto se ha eliminado'})
+    } catch (error) {
+        console.log(error);
+        next();
+    }
+}
